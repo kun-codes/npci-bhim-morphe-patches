@@ -10,9 +10,9 @@ TODO: Update this about section with a brief introduction/summary about this rep
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.1.2](https://github.com/kun-codes/npci-bhim-morphe-patches/releases/tag/v1.1.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;5 patches total
+> **[v1.2.0](https://github.com/kun-codes/npci-bhim-morphe-patches/releases/tag/v1.2.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;6 patches total
 <details open>
-<summary>📦 BHIM UPI&nbsp;&nbsp;•&nbsp;&nbsp;5 patches</summary>
+<summary>📦 BHIM UPI&nbsp;&nbsp;•&nbsp;&nbsp;6 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -23,6 +23,7 @@ TODO: Update this about section with a brief introduction/summary about this rep
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Bypass License Check](#bypass-license-check) | Bypasses Google Play Store license verification in com.pairip.licensecheck.LicenseClient to prevent System.exit(0) on non-Play Store installs. |  |
+| [Bypass License Paywall](#bypass-license-paywall) | Neutralizes the license paywall and error dialog at the source by patching LicenseClient.startPaywallActivity and LicenseClient.handleError to return immediately. |  |
 | [Bypass Pairip Protection](#bypass-pairip-protection) | Removes VMRunner.setContext, SignatureCheck.verifyIntegrity, and LicenseClient.checkLicense calls from Application.attachBaseContext to prevent pairip security initialization. |  |
 | [Bypass Signature Verification](#bypass-signature-verification) | Bypasses APK signature verification in com.pairip.SignatureCheck to prevent SignatureTamperedException on modified APKs. |  |
 | [Disable Blacklisting](#disable-blacklisting) | Disables the blacklisting check in the affirmation flow to prevent the app from blocking rooted devices server-side. |  |

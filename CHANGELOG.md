@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/kun-codes/npci-bhim-morphe-patches/compare/v1.1.2...v1.2.0) (2026-06-28)
+
+### ✨ New Features
+
+* add BypassLicensePaywall patch to neutralize paywall at source ([469139a](https://github.com/kun-codes/npci-bhim-morphe-patches/commit/469139a11c10edaef0844f4fa2e3d2a5f5aa4a06))
+
 ## [1.1.2](https://github.com/kun-codes/npci-bhim-morphe-patches/compare/v1.1.1...v1.1.2) (2026-06-28)
 
 ### 🐛 Bug Fixes
