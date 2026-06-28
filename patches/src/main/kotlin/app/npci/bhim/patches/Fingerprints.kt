@@ -113,3 +113,26 @@ object RootStatusComparisonFingerprint : Fingerprint(
         classDef.type == "LQ4/JsDum;"
     }
 )
+
+object PaywallActivityFingerprint : Fingerprint(
+    returnType = "V",
+    parameters = listOf("Landroid/app/PendingIntent;"),
+    filters = listOf(
+        string("paywallintent"),
+        string("activitytype"),
+    ),
+    custom = { _, classDef ->
+        classDef.type == "Lcom/pairip/licensecheck/LicenseClient;"
+    }
+)
+
+object HandleErrorFingerprint : Fingerprint(
+    returnType = "V",
+    parameters = listOf("Lcom/pairip/licensecheck/LicenseCheckException;"),
+    filters = listOf(
+        string("Error while checking license: "),
+    ),
+    custom = { _, classDef ->
+        classDef.type == "Lcom/pairip/licensecheck/LicenseClient;"
+    }
+)

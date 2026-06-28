@@ -1,6 +1,6 @@
 {
-  "created_at": "2026-06-28T08:27:53",
-  "description": "## [1.1.2](https://github.com/kun-codes/npci-bhim-morphe-patches/compare/v1.1.1...v1.1.2) (2026-06-28)\n\n### 🐛 Bug Fixes\n\n* DeviceIntegrityCheckFingerprint - use method name match instead of string filters ([6c86dc7](https://github.com/kun-codes/npci-bhim-morphe-patches/commit/6c86dc7e4d4ef5e5e98b05105c0b48b6027d45a9))",
+  "created_at": "2026-06-28T09:00:00",
+  "description": "Add BypassLicensePaywall patch - neutralizes paywall and error dialog at source",
   "download_url": "https://github.com/kun-codes/npci-bhim-morphe-patches/releases/download/v1.1.2/patches-1.1.2.mpp",
   "signature_download_url": "",
   "version": "1.1.2"

@@ -29,6 +29,32 @@
       "options": []
     },
     {
+      "name": "Bypass License Paywall",
+      "description": "Neutralizes the license paywall and error dialog at the source by patching LicenseClient.startPaywallActivity and LicenseClient.handleError to return immediately.",
+      "default": true,
+      "dependencies": [],
+      "compatiblePackages": [
+        {
+          "packageName": "in.org.npci.upiapp",
+          "name": "BHIM UPI",
+          "description": null,
+          "apkFileType": "APK",
+          "appIconColor": "#097969",
+          "signatures": null,
+          "targets": [
+            {
+              "version": "4.0.24",
+              "versionCodes": {},
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Bypass Pairip Protection",
       "description": "Removes VMRunner.setContext, SignatureCheck.verifyIntegrity, and LicenseClient.checkLicense calls from Application.attachBaseContext to prevent pairip security initialization.",
       "default": true,
