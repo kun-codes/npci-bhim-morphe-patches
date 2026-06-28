@@ -5,19 +5,17 @@ import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
 
 object Constants {
-    val COMPATIBILITY_EXAMPLE = Compatibility(
-        name = "XYZ app",
-        packageName = "com.example.app",
+    val COMPATIBILITY_BHIM = Compatibility(
+        name = "BHIM UPI",
+        packageName = "in.org.npci.upiapp",
         apkFileType = ApkFileType.APK,
-        appIconColor = 0xFF0045, // Icon color in Morphe Manager
+        appIconColor = 0x097969,
         targets = listOf(
-            // "version = null" means the patch works with the latest app target
-            // and is expected to work with all future app targets
             AppTarget(
-                version = "2.0.0"
-            ),
-            AppTarget(
-                version = "1.0.2",
+                version = "4.0.24",
+                versionCodes = mapOf(
+                    // versionCode 272000209
+                )
             )
         )
     )

@@ -1,11 +1,11 @@
-group = "app.template"
+group = "app.npci.bhim"
 
 patches {
     about {
-        name = "UserXYZ Patches"
-        description = "Patches for apps I like"
-        source = "git@github.com:UserXYZ/morphe-patches.git"
-        author = "Awesome dev"
+        name = "BHIM UPI Patches"
+        description = "Patches for BHIM UPI app - root detection bypass"
+        source = "git@github.com:npci-bhim-morphe-patches.git"
+        author = "kunal"
         contact = "na"
         website = "na"
         license = "GPLv3"
