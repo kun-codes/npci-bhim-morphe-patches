@@ -91,13 +91,8 @@ object DeviceDetailsBuilderFingerprint : Fingerprint(
 object DeviceIntegrityCheckFingerprint : Fingerprint(
     returnType = "Z",
     parameters = emptyList(),
-    filters = listOf(
-        string("deviceIntegrity"),
-        string("basicIntegrity"),
-        string("strongIntegrity"),
-    ),
-    custom = { _, classDef ->
-        classDef.type == "Lr3z/DEaXh;"
+    custom = { methodDef, classDef ->
+        classDef.type == "Lr3z/DEaXh;" && methodDef.name == "isEmpty"
     }
 )
 
