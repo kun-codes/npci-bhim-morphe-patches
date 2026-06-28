@@ -10,7 +10,7 @@ TODO: Update this about section with a brief introduction/summary about this rep
 ## 🩹 Patches list
 
 <!-- PATCHES_START EXPANDED -->
-> **[v1.1.1](https://github.com/kun-codes/npci-bhim-morphe-patches/releases/tag/v1.1.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;5 patches total
+> **[v1.1.2](https://github.com/kun-codes/npci-bhim-morphe-patches/releases/tag/v1.1.2)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;5 patches total
 <details open>
 <summary>📦 BHIM UPI&nbsp;&nbsp;•&nbsp;&nbsp;5 patches</summary>
 <br>
