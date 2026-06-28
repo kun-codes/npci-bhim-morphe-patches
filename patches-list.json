@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "patches": [
     {
       "name": "Bypass License Check",
@@ -30,7 +30,7 @@
     },
     {
       "name": "Bypass License Paywall",
-      "description": "Neutralizes the license paywall and error dialog at the source by patching LicenseClient.startPaywallActivity and LicenseClient.handleError to return immediately.",
+      "description": "Neutralizes the license paywall and error dialog at the source by patching LicenseClient.processResponse, startPaywallActivity, and handleError to return immediately.",
       "default": true,
       "dependencies": [],
       "compatiblePackages": [
@@ -55,13 +55,10 @@
       "options": []
     },
     {
-      "name": "Bypass Pairip Protection",
-      "description": "Removes VMRunner.setContext, SignatureCheck.verifyIntegrity, and LicenseClient.checkLicense calls from Application.attachBaseContext to prevent pairip security initialization.",
+      "name": "Bypass License Activity",
+      "description": "Neutralizes LicenseActivity.onStart to prevent the paywall and error dialog from being displayed, acting as a catch-all guard if LicenseActivity is ever started.",
       "default": true,
-      "dependencies": [
-        "BytecodePatch",
-        "BytecodePatch"
-      ],
+      "dependencies": [],
       "compatiblePackages": [
         {
           "packageName": "in.org.npci.upiapp",

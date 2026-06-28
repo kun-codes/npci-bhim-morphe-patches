@@ -1,17 +1,12 @@
 package app.npci.bhim.patches
 
 import app.morphe.patcher.Fingerprint
-import app.morphe.patcher.InstructionLocation.MatchAfterImmediately
 import app.morphe.patcher.methodCall
-import app.morphe.patcher.opcode
 import app.morphe.patcher.string
-import com.android.tools.smali.dexlib2.AccessFlags
-import com.android.tools.smali.dexlib2.Opcode
 
 /**
  * Fingerprint for com.pairip.SignatureCheck.verifyIntegrity(Context)
- * This method verifies APK signature and throws SignatureTamperedException if invalid.
- * Identified by the string "SHA-256" and the method signature check flow.
+ * Verified against smali: contains const-string "SHA-256" and "Apk signature is invalid."
  */
 object SignatureCheckFingerprint : Fingerprint(
     returnType = "V",
@@ -27,8 +22,7 @@ object SignatureCheckFingerprint : Fingerprint(
 
 /**
  * Fingerprint for com.pairip.licensecheck.LicenseClient.checkLicense(Context)
- * This static method initiates the Play Store license verification.
- * Identified by the string "Skipping license check in isolated process."
+ * Verified against smali: contains const-string "Skipping license check in isolated process."
  */
 object LicenseCheckFingerprint : Fingerprint(
     returnType = "V",
@@ -42,36 +36,8 @@ object LicenseCheckFingerprint : Fingerprint(
 )
 
 /**
- * Fingerprint for com.pairip.application.Application.attachBaseContext(Context)
- * This is the entry point where all pairip security is initialized.
- * Identified by the sequence of calls: VMRunner.setContext -> SignatureCheck.verifyIntegrity -> LicenseClient.checkLicense
- */
-object ApplicationAttachBaseContextFingerprint : Fingerprint(
-    returnType = "V",
-    parameters = listOf("Landroid/content/Context;"),
-    filters = listOf(
-        methodCall(
-            definingClass = "Lcom/pairip/VMRunner;",
-            name = "setContext",
-        ),
-        methodCall(
-            definingClass = "Lcom/pairip/SignatureCheck;",
-            name = "verifyIntegrity",
-        ),
-        methodCall(
-            definingClass = "Lcom/pairip/licensecheck/LicenseClient;",
-            name = "checkLicense",
-        ),
-    ),
-    custom = { _, classDef ->
-        classDef.type == "Lcom/pairip/application/Application;"
-    }
-)
-
-/**
  * Fingerprint for Q4.Fi0zof57.sfPE() - Device details builder.
- * This method builds device details including rootStatus.
- * Identified by the string "safe" being set as rootStatus.
+ * Verified against smali: contains const-string "safe".
  */
 object DeviceDetailsBuilderFingerprint : Fingerprint(
     returnType = "Lr3z/W6XuWJ;",
@@ -85,8 +51,7 @@ object DeviceDetailsBuilderFingerprint : Fingerprint(
 
 /**
  * Fingerprint for r3z.DEaXh.isEmpty() - Device integrity check.
- * This method checks if device recognition verdict fields are empty.
- * Identified by checking deviceIntegrity, basicIntegrity, strongIntegrity fields.
+ * Verified against smali: method name "isEmpty" with return type Z in class Lr3z/DEaXh;
  */
 object DeviceIntegrityCheckFingerprint : Fingerprint(
     returnType = "Z",
@@ -98,8 +63,7 @@ object DeviceIntegrityCheckFingerprint : Fingerprint(
 
 /**
  * Fingerprint for the root status comparison in Q4.JsDum.sfPE()
- * This static method compares root status from client vs server response.
- * Identified by the "safe" string comparison and getRootStatus calls.
+ * Verified against smali: calls getRootStatus in class LQ4/JsDum;
  */
 object RootStatusComparisonFingerprint : Fingerprint(
     returnType = "V",
@@ -114,6 +78,11 @@ object RootStatusComparisonFingerprint : Fingerprint(
     }
 )
 
+/**
+ * Fingerprint for LicenseClient.startPaywallActivity(PendingIntent)
+ * Verified against smali: private method, parameter Landroid/app/PendingIntent;,
+ * contains const-string "paywallintent" and "activitytype".
+ */
 object PaywallActivityFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf("Landroid/app/PendingIntent;"),
@@ -126,6 +95,11 @@ object PaywallActivityFingerprint : Fingerprint(
     }
 )
 
+/**
+ * Fingerprint for LicenseClient.handleError(LicenseCheckException)
+ * Verified against smali: private method, parameter Lcom/pairip/licensecheck/LicenseCheckException;,
+ * contains const-string "Error while checking license: ".
+ */
 object HandleErrorFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf("Lcom/pairip/licensecheck/LicenseCheckException;"),
@@ -134,5 +108,39 @@ object HandleErrorFingerprint : Fingerprint(
     ),
     custom = { _, classDef ->
         classDef.type == "Lcom/pairip/licensecheck/LicenseClient;"
+    }
+)
+
+/**
+ * Fingerprint for LicenseClient.processResponse(int, Bundle)
+ * Verified against smali: private method with params (ILandroid/os/Bundle;)V,
+ * contains const-string "Unexpected response code %d received.".
+ * This is the decision point where response code 2 triggers the paywall.
+ */
+object ProcessResponseFingerprint : Fingerprint(
+    returnType = "V",
+    parameters = listOf("I", "Landroid/os/Bundle;"),
+    filters = listOf(
+        string("Unexpected response code %d received."),
+    ),
+    custom = { _, classDef ->
+        classDef.type == "Lcom/pairip/licensecheck/LicenseClient;"
+    }
+)
+
+/**
+ * Fingerprint for LicenseActivity.onStart()
+ * Verified against smali: public method with no params returning V,
+ * contains const-string "activitytype".
+ * This is the entry point for the paywall/error dialog activity.
+ */
+object LicenseActivityOnStartFingerprint : Fingerprint(
+    returnType = "V",
+    parameters = emptyList(),
+    filters = listOf(
+        string("activitytype"),
+    ),
+    custom = { _, classDef ->
+        classDef.type == "Lcom/pairip/licensecheck/LicenseActivity;"
     }
 )
